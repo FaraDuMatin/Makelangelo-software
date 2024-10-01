@@ -253,6 +253,28 @@ class TurtleTest {
     }
 
     @Test
+    public void equalsTwoTurtles2() {
+        // given
+        Turtle turtle = new Turtle();
+
+        turtle.penDown();
+        turtle.moveTo(20, 30);
+        turtle.moveTo(10, 15);
+        turtle.jumpTo(-15, -7);
+        turtle.moveTo(3, 5);
+
+        Turtle turtle2 = new Turtle();
+        turtle2.penDown();
+        turtle2.moveTo(20, 30);
+        turtle2.moveTo(10, 15);
+        turtle2.jumpTo(-15, -7);
+        turtle2.moveTo(3, 5);
+
+        // then
+        assertEquals(turtle, turtle2);
+    }
+
+    @Test
     public void notEqualsTwoTurtles() {
         // given
         Turtle turtle = new Turtle();
