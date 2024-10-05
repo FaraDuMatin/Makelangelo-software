@@ -85,6 +85,52 @@ public class PlotterSettingsTest {
 
     }
 
+
+    @Test
+    public void testFKAtLeftTopCorner() {
+        Plotter plotter = new Plotter();
+        plotter.getSettings().setDouble(PlotterSettings.LIMIT_LEFT, -1000.0);
+        plotter.getSettings().setDouble(PlotterSettings.LIMIT_RIGHT, 1000.0);
+        plotter.getSettings().setDouble(PlotterSettings.LIMIT_TOP, 1000.0);
+
+        double expectedX = -1000.0;
+        double expectedY = 0.0;
+
+        Polargraph polargraph = new Polargraph() {};
+        Point2D belts = polargraph.IK(plotter, expectedX, expectedY);
+        double beltL = belts.x;
+        double beltR = belts.y;
+
+        Point2D position = polargraph.FK(plotter, beltL, beltR);
+
+        double epsilon = 1e-6;
+        assertEquals("X-coordinate mismatch", expectedX, position.x, epsilon);
+        assertEquals("Y-coordinate mismatch", expectedY, position.y, epsilon);
+    }
+
+    @Test
+    public void testFKAtRightBottomCorner() {
+        Plotter plotter = new Plotter();
+        plotter.getSettings().setDouble(PlotterSettings.LIMIT_LEFT, -1000.0);
+        plotter.getSettings().setDouble(PlotterSettings.LIMIT_RIGHT, 1000.0);
+        plotter.getSettings().setDouble(PlotterSettings.LIMIT_TOP, 1000.0);
+        plotter.getSettings().setDouble(PlotterSettings.LIMIT_BOTTOM, -1000.0);
+
+        double expectedX = 1000.0;
+        double expectedY = -1000.0;
+
+        Polargraph polargraph = new Polargraph() {};
+        Point2D belts = polargraph.IK(plotter, expectedX, expectedY);
+        double beltL = belts.x;
+        double beltR = belts.y;
+
+        Point2D position = polargraph.FK(plotter, beltL, beltR);
+
+        double epsilon = 1e-6;
+        assertEquals("X-coordinate mismatch", expectedX, position.x, epsilon);
+        assertEquals("Y-coordinate mismatch", expectedY, position.y, epsilon);
+    }
+
     @AfterEach
     public void clean() {
         Preferences topLevelMachinesPreferenceNode = PreferencesHelper
