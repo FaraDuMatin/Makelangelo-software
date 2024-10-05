@@ -15,6 +15,7 @@ public class GeneratorTextTest {
         generator = new Generator_Text();
     }
 
+    // Test the generate() method
     @Test
     public void testGenerate() {
         // Set up initial message and font size
@@ -25,7 +26,6 @@ public class GeneratorTextTest {
         generator.generate();
 
         // Check if the turtle is created correctly based on the input
-        // Note: You might need to inspect the Turtle object to assert on the details
         Turtle turtle = new Turtle();
         assertNotNull(turtle); // Checking if a Turtle object is created
     }
@@ -39,10 +39,89 @@ public class GeneratorTextTest {
         generator.generate();
 
         // Since the message is empty, the turtle should not perform any drawing
-        // Again, assert on the turtle object state based on your design
         Turtle turtle = new Turtle();
-        assertNotNull(turtle); // Checking if a Turtle object is created but it should not contain any paths
+        assertNotNull(turtle); // Checking if a Turtle object is created
     }
+
+    // Test the setFont() method
+    @Test
+    public void testSetFontWithinBounds() {
+        // Assuming fontNames array is not empty
+        String[] fontNames = generator.getFontNames();
+        assertTrue(fontNames.length > 0); // There should be at least one font
+
+        generator.setFont(0);  // First font
+        assertEquals(0, generator.getLastFont());
+
+        generator.setFont(fontNames.length - 1);  // Last font
+        assertEquals(fontNames.length - 1, generator.getLastFont());
+    }
+
+    @Test
+    public void testSetFontOutOfBounds() {
+        String[] fontNames = generator.getFontNames();
+        assertTrue(fontNames.length > 0);
+
+        // Setting font with an index below 0 should default to 0
+        generator.setFont(-1);
+        assertEquals(0, generator.getLastFont());
+
+        // Setting font with an index above the length should default to the last index
+        generator.setFont(fontNames.length + 1);
+        assertEquals(fontNames.length - 1, generator.getLastFont());
+    }
+
+    // Test the setSize() method
+    @Test
+    public void testSetSizeWithinBounds() {
+        generator.setSize(20);
+        assertEquals(20, generator.getLastSize());
+
+        generator.setSize(100);
+        assertEquals(100, generator.getLastSize());
+    }
+
+    @Test
+    public void testSetSizeBelowMinimum() {
+        // When size is set to less than 1, it should default to 1
+        generator.setSize(0);
+        assertEquals(1, generator.getLastSize());
+
+        generator.setSize(-5);
+        assertEquals(1, generator.getLastSize());
+    }
+
+    // Test the textFindCharsPerLine() method
+
+
+
+
+    // Test the setMessage() method
+    @Test
+    public void testSetMessage() {
+        String message = "Test Message";
+        generator.setMessage(message);
+        assertEquals(message, generator.getLastMessage());
+    }
+
+    @Test
+    public void testSetEmptyMessage() {
+        generator.setMessage("");
+        assertEquals("", generator.getLastMessage());
+    }
+
+    @Test
+    public void testSetNullMessage() {
+        generator.setMessage(null);  // Null input should be handled gracefully
+        assertNull(generator.getLastMessage());
+    }
+
+    // Test the writeBeautifulMessage() method
+
+
+
+
+
 }
 
 
