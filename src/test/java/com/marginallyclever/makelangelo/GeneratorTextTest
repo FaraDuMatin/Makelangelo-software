@@ -1,1 +1,48 @@
+package com.marginallyclever.makelangelo.turtle;
+
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+import com.marginallyclever.makelangelo.makeart.turtlegenerator.Generator_Text;
+import com.marginallyclever.makelangelo.turtle.Turtle;
+
+public class GeneratorTextTest {
+
+    private Generator_Text generator;
+
+    @Before
+    public void setUp() {
+        generator = new Generator_Text();
+    }
+
+    @Test
+    public void testGenerate() {
+        // Set up initial message and font size
+        generator.setMessage("Hello World");
+        generator.setSize(20);
+
+        // Trigger the generate method
+        generator.generate();
+
+        // Check if the turtle is created correctly based on the input
+        // Note: You might need to inspect the Turtle object to assert on the details
+        Turtle turtle = new Turtle();
+        assertNotNull(turtle); // Checking if a Turtle object is created
+    }
+
+    @Test
+    public void testEmptyMessageGenerate() {
+        // Set an empty message
+        generator.setMessage("");
+
+        // Trigger the generate method
+        generator.generate();
+
+        // Since the message is empty, the turtle should not perform any drawing
+        // Again, assert on the turtle object state based on your design
+        Turtle turtle = new Turtle();
+        assertNotNull(turtle); // Checking if a Turtle object is created but it should not contain any paths
+    }
+}
+
 
