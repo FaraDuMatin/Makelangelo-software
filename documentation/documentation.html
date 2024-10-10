@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation des Tests Unitaires - Makelangelo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        section {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>EXPLICATIONS DE TESTS UNITAIRES</h1>
+    <p>Équipe : FATHYA SALIM - MOHAMED FARAH</p>
+    <p>Cours : IFT3913 - TÂCHE #2 - MAKELANGELO</p>
+</header>
+
+<section>
+    <h2>Test raisePen()</h2>
+    <p>
+        Chemin : <strong>src/test/java/com/marginallyclever/makelangelo/plotter/PlotterTest.java</strong>
+    </p>
+    <p>
+        Le but de ce test est de vérifier que l'appel de la méthode <strong>raisePen()</strong> lève correctement le stylo du traceur, en modifiant l'état interne de l'objet plotter de sorte que le stylo soit considéré comme "levé" (c'est-à-dire que le traceur ne trace plus sur une surface).
+        Ce test est essentiel pour garantir que le comportement de la méthode <strong>raisePen()</strong> est conforme aux attentes. Un mauvais fonctionnement pourrait entraîner un traçage involontaire si le stylo n'est pas correctement levé, ce qui serait problématique dans des applications de dessin automatisé ou de contrôle de périphériques.
+        De plus, cette fonctionnalité n’a pas été testée, donc on l’a rajoutée.
+    </p>
+</section>
+
+<section>
+    <h2>Test lowerPen()</h2>
+    <p>
+        Chemin : <strong>src/test/java/com/marginallyclever/makelangelo/plotter/PlotterTest.java</strong>
+    </p>
+    <p>
+        Ce test vise à valider que la méthode <strong>lowerPen()</strong> de l'objet plotter fonctionne correctement en abaissant le stylo. Avant d'appeler cette méthode, le test commence par s'assurer que le stylo est levé grâce à l'appel de <strong>raisePen()</strong>. Ensuite, la méthode <strong>lowerPen()</strong> est appelée pour abaisser le stylo, et on vérifie que l'état du plotter est bien passé en mode "stylo baissé", ce qui signifie que le traceur est prêt à tracer.
+        Ce test est essentiel pour garantir que la méthode <strong>lowerPen()</strong> change bien l'état du stylo en position basse. Si cette méthode ne fonctionnait pas correctement, cela pourrait entraîner l'échec du processus de traçage, car le stylo resterait levé et incapable de dessiner.
+    </p>
+</section>
+
+<section>
+    <h2>Test setPos()</h2>
+    <p>
+        Chemin : <strong>src/test/java/com/marginallyclever/makelangelo/plotter/PlotterTest.java</strong>
+    </p>
+    <p>
+        Ce test a pour objectif de valider que la méthode <strong>setPos(double x, double y)</strong> de l'objet plotter positionne correctement le traceur aux coordonnées spécifiées. Ici, les coordonnées (100.0, 200.0) sont définies, puis la méthode <strong>getPos()</strong> est utilisée pour récupérer ces coordonnées. Le test vérifie également que l'événement lié au changement de position du traceur a bien été déclenché, en s'assurant que l'objet listenerMock a été notifié via l'appel de la méthode <strong>plotterEvent</strong>.
+        Ce test est crucial pour vérifier que le traceur se positionne correctement aux coordonnées spécifiées et que tout changement de position déclenche l'événement approprié.
+    </p>
+</section>
+
+<section>
+    <h2>Test clear()</h2>
+    <p>
+        Chemin : <strong>src/test/java/com/marginallyclever/makelangelo/plotter/StatusBarTest</strong>
+    </p>
+    <p>
+        Ce test vérifie le bon fonctionnement de la méthode <strong>clear()</strong> de l'objet statusBar. Avant de tester la méthode, des valeurs spécifiques ("Test Lines" et "Test Time") sont assignées aux labels <strong>mLines</strong> et <strong>mTime</strong> de la barre de statut pour simuler un état actif. Ensuite, la méthode <strong>clear()</strong> est appelée pour vider le texte de ces labels. Le test utilise <strong>SwingUtilities.invokeAndWait()</strong> pour s'assurer que ces opérations sont exécutées sur le thread de l'interface graphique (Event Dispatch Thread), conformément aux bonnes pratiques de programmation Swing.
+        Ce test est essentiel pour garantir que la méthode <strong>clear()</strong> remet correctement à zéro les labels de la barre de statut.
+    </p>
+</section>
+
+<section> 
+    <h2>Test testGetPaperHeight()</h2> 
+    <p>
+        Chemin : <strong>src/test/java/com/marginallyclever/makelangelo/paper/PaperTest.java</strong>
+    </p>
+    <p> 
+        Le but de ce test est de vérifier que la méthode <strong>getPaperHeight()</strong> de la classe <strong>Paper</strong> retourne correctement la hauteur du papier, en testant à la fois la valeur par défaut et après avoir défini une nouvelle taille avec <strong>setPaperSize()</strong>. Cette fonctionnalité n'avait pas été testée auparavant, donc ce test a été ajouté pour garantir que la méthode fonctionne correctement et augmenter la couverture des tests. 
+    </p>  
+</section>
+
+<section>
+    <h2>Test testSetMotorsEngaged()</h2>
+    <p> 
+        Chemin : <strong>src/test/java/com/marginallyclever/makelangelo/plotter/PlotterTest.java</strong>
+    </p>
+    <p> 
+        Le but de ce test est de vérifier le bon fonctionnement de la méthode <strong><code>setMotorsEngaged()</code></strong> de la classe <strong><code>Plotter</code></strong>, ainsi que de s'assurer que l'état des moteurs est correctement mis à jour et que les événements appropriés sont déclenchés. Aussi cette fonction n'était pas testé ce qui augmente la couverture de code.
+    </p>
+</section>
+
+<section>
+    <h2>Test testGetPaperWidth()</h2> 
+    <p>
+        Chemin : <strong>src/test/java/com/marginallyclever/makelangelo/paper/PaperTest.java</strong>
+    </p>
+    <p>
+        Le but de ce test est de vérifier que la méthode <strong>getPaperWidth()</strong> de la classe <strong>Paper</strong> retourne correctement la largeur du papier, en prenant en compte la largeur par défaut ainsi que les modifications apportées via la méthode <strong>setPaperSize()</strong>.
+    </p>
+</section>
+
+<section>
+    <h2>Test testReInit()</h2> 
+    <p>
+        Chemin : <strong>src/test/java/com/marginallyclever/makelangelo/plotter/PlotterTest.java</strong>
+    </p>
+    <p>
+        Ce test vérifie que la méthode <strong>reInit()</strong> de la classe <strong>Plotter</strong> réinitialise correctement l'état du traceur. Après avoir appelé <strong>findHome()</strong> et engagé les moteurs avec <strong>setMotorsEngaged(true)</strong>, le test appelle <strong>reInit()</strong> et s'assure que les moteurs sont désengagés et que le traceur n'a plus trouvé la position de départ. Cette fonctionnalité n'avait pas été testée auparavant, donc ce test a été ajouté pour garantir que la réinitialisation fonctionne comme prévu.
+    </p>
+</section>
+
+<section>
+    <h2>Test testSecondsToHumanReadable()</h2> 
+    <p>
+        Chemin : <strong>src/test/java/com/marginallyclever/makelangelo/plotter/StatusBarTest</strong>
+    </p>
+    <p>
+        Ce test augmente la couverture du code et assure que la conversion des secondes en un format lisible (heures, minutes, secondes) est précise, facilitant ainsi la compréhension des durées par les utilisateurs dans l'interface.
+    </p>
+</section>
+
+<section>
+    <h2>Test testDeepCopyImage()</h2> 
+    <p>
+        Chemin : <strong>src/test/java/com/marginallyclever/makelangelo/makeart/TransformedImageTest.java</strong>
+    </p>
+    <p>
+        Ce test assure que la méthode deepCopy() produit une copie exacte et indépendante de l'image originale, évitant ainsi toute altération non intentionnelle de l'image source lors des manipulations ultérieures.
+    </p>
+</section>
+
+<section>
+    <h2>COVERAGE AVANT IMPLÉMENTATION DE TESTS SUPPLÉMENTAIRES</h2>
+
+    <h3>Makelangelo</h3>
+    <img src="makelangelo.png" alt="Coverage Makelangelo">
+
+    <h3>Plotter</h3>
+    <img src="plotter.png" alt="Coverage Plotter">
+
+    <h3>Paper</h3>
+    <img src="paper.png" alt="Coverage Paper">
+
+    <h3>TransformedImage</h3>
+    <img src="transformedImage.png" alt="Coverage TransformedImage">
+
+    <h3>StatusBar</h3>
+    <img src="statusbar.png" alt="Coverage StatusBar">
+
+</section>
+
+<section>
+    <h2>COVERAGE APRÈS IMPLÉMENTATION DE TESTS SUPPLÉMENTAIRES</h2>
+
+    <h3>Makelangelo</h3>
+    <img src="makelangeloApres.png" alt="Coverage Makelangelo Apres">
+
+    <h3>Plotter</h3>
+    <img src="plotterApres.png" alt="Coverage Plotter Apres">
+
+    <h3>Paper</h3>
+    <img src="PaperApres.png" alt="Coverage Paper Apres">
+
+    <h3>TransformedImage</h3>
+    <img src="transformedImageApres.png" alt="Coverage TransformedImage Apres">
+
+    <h3>StatusBar</h3>
+    <img src="statusBarApres.png" alt="Coverage StatusBar Apres">
+
+</section>
+<h2>Couverture finale : 24.84%</h2>
+
+
+</body>
+</html>
