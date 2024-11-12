@@ -21,7 +21,7 @@ jobs:
 
 
     - name: Run Maven tests with ${ matrix.flags }
-      run: mvn verify -DargLine="${{ matrix.flags }}
+      run: mvn verify -DargLine="@{argLine} ${{ matrix.flags }}
 
     
   
