@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        flags: [ "-Xms1024m -Xmx2048m", "-XX:+UseParallelGC", "-XX:+PrintGCDetails",  "-XX:+UseAES", "-XX:+TieredCompilation"]
     steps:
     - uses: actions/checkout@v4
 
@@ -16,6 +19,16 @@ jobs:
         java-version: '17'
         cache: 'maven'
 
+
+    - name: Run Maven tests with ${ matrix.flags }
+      run: mvn verify -DargLine="${{ matrix.flags }}
+
+    - name: Get JaCoCo Coverage with ${ configurations.jvm_flags_set }
+      id: coverageFlags
+      run: |
+        coverage=$(python3 config/coverage.py target/site/jacoco/jacoco.csv)
+        echo "COVERAGE=$coverage" >> $GITHUB_ENV
+  
     - name: Build and Test with Maven
       timeout-minutes: 15
       run: ./mvnw -B verify
