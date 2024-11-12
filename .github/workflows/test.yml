@@ -23,7 +23,7 @@ jobs:
     - name: Run Maven tests with ${ matrix.flags }
       run: mvn verify -DargLine="${{ matrix.flags }}
 
-    - name: Get JaCoCo Coverage with ${ configurations.jvm_flags_set }
+    - name: Get JaCoCo Coverage with ${ matrix.flags }
       id: coverageFlags
       run: |
         coverage=$(python3 config/coverage.py target/site/jacoco/jacoco.csv)
