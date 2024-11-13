@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        flags: [ "-Xms1024m -Xmx2048m", "-XX:+UseParallelGC", "-XX:+PrintGCDetails",  "-XX:+UseAES", "-XX:+TieredCompilation"]
+        flags: [ "-Xms512m -Xmx1024m", "-XX:+UseG1GC", "-XX:+PrintFlagsFinal", "-XX:CompileThreshold=1500", "-XX:+UseStringDeduplication" ]
     steps:
     - uses: actions/checkout@v4
 
@@ -21,7 +21,7 @@ jobs:
 
 
     - name: Run Maven tests with ${ matrix.flags }
-      run: mvn verify -DargLine="@{argLine} ${{ matrix.flags }}
+      run: mvn verify -DargLine="@{argLine} ${{ matrix.flags }}"
 
     
   
